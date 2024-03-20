@@ -3,19 +3,14 @@
 // You may not distribute it in any other way without permission.
 
 /* Code for COMP102 - 2024T1, Assignment 2
- * Name:
- * Username:
- * ID:
+ * Name: Jack Scrivener
+ * Username: scrivejack
+ * ID: 300658748
  */
 
  import ecs100.*;
  import java.awt.Color;
-import java.text.CharacterIterator;
-import java.util.List;
-import java.util.Vector;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.Collections; 
+
 
  /**
   * Asks user for a key word and checks whether it meets a set of rules or not.
@@ -38,12 +33,11 @@ import java.util.Collections;
       * Report that the key is valid or report ALL the rules that the key failed.
       */
      public void validateKey(String key,String name){
-         /*# YOUR CODE HERE */
 
          String error_list_errors[] = {"Password too short","Password too long","Password starts with !",
          "Password starts with &","Password contains @","Password needs to contain capital",
          "Password needs to contain lower case","Password needs to contain both a letter and number",
-         "Password can not contain name in senquince"};
+         "Password can not contain your name in senquince"};
          boolean error_list_numbers[] = {false,false,false,false,false,true,true,true,false};
          boolean number = false;
          boolean letter = false;
@@ -84,9 +78,7 @@ import java.util.Collections;
          }
 
          boolean failed = false;
-
          String key_with_blanks = key;
-
          int char_counter[] = new int[name.length()];
   
          //This checks if the name is inside the string 
@@ -94,9 +86,12 @@ import java.util.Collections;
             for(int char_in_key=0; char_in_key < key.length(); char_in_key +=1){
                 if(key_with_blanks.charAt(char_in_key) == name.charAt(char_in_name)){
                     char_counter[char_in_name] += 1;
-                    UI.println("char found:"+key_with_blanks.charAt(char_in_key) +"at" + char_in_key);
-                    key_with_blanks = key_with_blanks.replaceFirst(String.valueOf(key_with_blanks.charAt(char_in_key))," ");
-                    UI.println("letter removed :" + key_with_blanks);
+
+                    char[] key_with_blanks_char_list = key_with_blanks.toCharArray();
+                    for(int k = 0; k < char_in_key; k+=1){
+                        key_with_blanks_char_list[k] = ' ';
+                    }
+                    key_with_blanks = String.valueOf(key_with_blanks_char_list);
                     break;
                 }else{
                     failed = true;
